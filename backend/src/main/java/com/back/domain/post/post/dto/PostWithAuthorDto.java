@@ -1,17 +1,18 @@
 package com.back.domain.post.post.dto;
 
 import com.back.domain.post.post.entity.Post;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
 
 public record PostWithAuthorDto(
-        long id,
-        LocalDateTime createDate,
-        LocalDateTime modifyDate,
-        long authorId,
-        String authorName,
-        String title,
-        String content
+        @NonNull long id,
+        @NonNull LocalDateTime createDate,
+        @NonNull LocalDateTime modifyDate,
+        @NonNull long authorId,
+        @NonNull String authorName,
+        @NonNull String title,
+        @NonNull String content
 ) {
     public PostWithAuthorDto(Post post) {
         this(
