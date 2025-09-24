@@ -224,7 +224,6 @@ export interface components {
             createDate?: string;
             /** Format: date-time */
             modifyDate?: string;
-            authorName?: string;
             title?: string;
             content?: string;
         };
@@ -283,6 +282,19 @@ export interface components {
             resultCode?: string;
             msg?: string;
             data?: components["schemas"]["MemberLoginResBody"];
+        };
+        PostWithAuthorDto: {
+            /** Format: int64 */
+            id?: number;
+            /** Format: date-time */
+            createDate?: string;
+            /** Format: date-time */
+            modifyDate?: string;
+            /** Format: int64 */
+            authorId?: number;
+            authorName?: string;
+            title?: string;
+            content?: string;
         };
         AdmPostCountResBody: {
             /** Format: int64 */
@@ -397,7 +409,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json;charset=UTF-8": components["schemas"]["PostDto"];
+                    "application/json;charset=UTF-8": components["schemas"]["PostWithAuthorDto"];
                 };
             };
         };
@@ -465,7 +477,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json;charset=UTF-8": components["schemas"]["PostDto"][];
+                    "application/json;charset=UTF-8": components["schemas"]["PostWithAuthorDto"][];
                 };
             };
         };
