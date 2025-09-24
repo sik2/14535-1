@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
@@ -80,5 +81,12 @@ public class BaseInitData {
     @Transactional
     public void work3() {
 
+    }
+
+    @Profile("dev")
+    @Bean
+    ApplicationRunner devInitDataApplicationRunner() {
+        return args ->
+                System.out.println("devInitDataApplicationRunner 실행");
     }
 }
