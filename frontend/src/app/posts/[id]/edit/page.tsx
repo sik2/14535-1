@@ -1,21 +1,12 @@
 'use client'
 
-import { use, useEffect, useState } from 'react'
+import { use } from 'react'
 
-import { useRouter } from 'next/navigation'
-
-import { client } from '@/lib/backend/client'
-
-import { components } from '@/lib/backend/apiV1/schema'
+import usePost from '../_hooks/usePost'
 
 export default function Page({ params }: { params: Promise<{ id: number }> }) {
-  type PostDto = components['schemas']['PostWithAuthorDto']
-
   const { id } = use(params)
-
-  const [post, setPost] = useState<PostDto | null>(null)
-
-  const router = useRouter()
+  const { post, modifyPost } = usePost(id)
 
   const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -39,40 +30,8 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
       return
     }
 
-    client
-      .PUT('/api/v1/posts/{id}', {
-        params: {
-          path: {
-            id,
-          },
-        },
-        body: {
-          title: titleInput.value,
-          content: contentInput.value,
-        },
-      })
-      .then((res) => {
-        if (res.error) {
-          alert(res.error.msg)
-          return
-        }
-
-        alert(res.data.msg)
-        router.replace(`/posts/${id}`)
-      })
+    modifyPost(id, titleInput.value, contentInput.value)
   }
-
-  useEffect(() => {
-    client
-      .GET('/api/v1/posts/{id}', {
-        params: {
-          path: {
-            id,
-          },
-        },
-      })
-      .then((res) => res.data && setPost(res.data))
-  }, [id])
 
   if (post === null) return <div>로딩중...</div>
 

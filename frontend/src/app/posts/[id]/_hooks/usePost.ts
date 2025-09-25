@@ -52,8 +52,33 @@ export default function usePost(id: number) {
       })
   }
 
+  const modifyPost = (id: number, title: string, content: string) => {
+    client
+      .PUT('/api/v1/posts/{id}', {
+        params: {
+          path: {
+            id,
+          },
+        },
+        body: {
+          title,
+          content,
+        },
+      })
+      .then((res) => {
+        if (res.error) {
+          alert(res.error.msg)
+          return
+        }
+
+        alert(res.data.msg)
+        router.replace(`/posts/${id}`)
+      })
+  }
+
   return {
     post,
     deletePost,
+    modifyPost,
   }
 }
