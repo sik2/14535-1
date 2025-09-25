@@ -1,8 +1,8 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { client } from '@/global/backend/client'
 
-import { client } from '@/lib/backend/client'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const router = useRouter()

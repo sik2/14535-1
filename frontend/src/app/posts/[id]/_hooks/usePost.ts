@@ -1,10 +1,8 @@
+import { components } from '@/global/backend/apiV1/schema'
+import { client } from '@/global/backend/client'
 import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
-
-import { client } from '@/lib/backend/client'
-
-import { components } from '@/lib/backend/apiV1/schema'
 
 type PostDto = components['schemas']['PostWithAuthorDto']
 

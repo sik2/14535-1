@@ -1,12 +1,11 @@
 'use client'
 
+import { client } from '@/global/backend/client'
 import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
-import { client } from '@/lib/backend/client'
-
-import { components } from '../../lib/backend/apiV1/schema.d'
+import { components } from '../../global/backend/apiV1/schema'
 
 export default function Page() {
   type PostDto = components['schemas']['PostWithAuthorDto']

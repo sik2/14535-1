@@ -1,6 +1,6 @@
-import Link from 'next/link'
+import { components } from '@/global/backend/apiV1/schema'
 
-import { components } from '@/lib/backend/apiV1/schema'
+import Link from 'next/link'
 
 type PostDto = components['schemas']['PostWithAuthorDto']
 interface PostDetailProps {

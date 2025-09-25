@@ -1,4 +1,4 @@
-import { components } from '@/lib/backend/apiV1/schema'
+import { components } from '@/global/backend/apiV1/schema'
 
 type PostCommentDto = components['schemas']['PostCommentDto']
 
