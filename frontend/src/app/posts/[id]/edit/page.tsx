@@ -2,7 +2,7 @@
 
 import { use } from 'react'
 
-import usePost from '../_hooks/usePost'
+import usePost from '../../../../domain/post/hooks/usePost'
 
 export default function Page({ params }: { params: Promise<{ id: number }> }) {
   const { id } = use(params)
