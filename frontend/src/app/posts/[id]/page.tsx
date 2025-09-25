@@ -2,8 +2,8 @@
 
 import { use } from 'react'
 
-import Link from 'next/link'
-
+import PostCommentWriteAndList from './_components/PostCommentWriteAndList'
+import PostDetail from './_components/PostDetail'
 import usePost from './_hooks/usePost'
 import usePostComments from './_hooks/usePostComments'
 
@@ -36,56 +36,14 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
 
   return (
     <>
-      <h1>게시글 상세페이지</h1>
-      <>
-        <div>게시글 번호: {post.id}</div>
-        <div>게시글 제목: {post.title}</div>
-        <div>게시글 내용: {post.content}</div>
-      </>
+      <PostDetail post={post} deletePost={deletePost} />
 
-      <div className="flex gap-2">
-        <button
-          onClick={() => deletePost(post.id!)}
-          className="p-2 rounded border"
-        >
-          삭제
-        </button>
-        <Link className="p-2 rounded border" href={`/posts/${post.id}/edit`}>
-          수정
-        </Link>
-      </div>
-
-      <h2>댓글 작성</h2>
-      <form className="flex flex-col gap-2 p-2" onSubmit={handleSumbit}>
-        <textarea
-          className="border p-2 rounded"
-          name="content"
-          placeholder="댓글 내용"
-        />
-        <button className="border p-2 rounded" type="submit">
-          작성
-        </button>
-      </form>
-
-      <h2>댓글 목록</h2>
-
-      {postComments === null && <div>댓글이 로딩중...</div>}
-
-      {postComments !== null && postComments.length > 0 && (
-        <ul>
-          {postComments.map((comment) => (
-            <li key={comment.id}>
-              {comment.id}/{comment.content}
-              <button
-                className="p-2 rounded border"
-                onClick={() => deletePostComment(id, comment.id)}
-              >
-                삭제
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+      <PostCommentWriteAndList
+        postId={id}
+        postComments={postComments}
+        deletePostComment={deletePostComment}
+        handleSumbit={handleSumbit}
+      />
     </>
   )
 }
