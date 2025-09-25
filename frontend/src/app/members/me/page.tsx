@@ -1,22 +1,9 @@
 'use client'
 
-import { components } from '@/global/backend/apiV1/schema'
-import { client } from '@/global/backend/client'
-import { useEffect, useState } from 'react'
-
-type MemberDto = components['schemas']['MemberDto']
+import useAuth from '@/global/auth/hooks/useAuth'
 
 export default function Page() {
-  const [loginMember, setLoginMember] = useState<MemberDto | null>(null)
-
-  useEffect(() => {
-    client.GET('/api/v1/members/me').then((res) => {
-      if (res.error) return
-
-      setLoginMember(res.data.data)
-    })
-  }, [])
-
+  const { loginMember } = useAuth()
   return (
     <>
       <h1>내 정보</h1>
