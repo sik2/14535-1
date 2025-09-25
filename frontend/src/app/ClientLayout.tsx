@@ -33,7 +33,7 @@ export default function ClientLayout({
                 href="/members/me"
                 className="p-2 rounded hover:bg-gray-100"
               >
-                {loginMember?.nickname}님의 정보
+                {loginMember.nickname}님의 정보
               </Link>
             </>
           ) : (
