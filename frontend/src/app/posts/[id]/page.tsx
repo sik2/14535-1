@@ -3,7 +3,6 @@
 import { use, useEffect, useState } from 'react'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 import { client } from '@/lib/backend/client'
 
@@ -19,30 +18,7 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
 
   const { id } = use(params)
 
-  const post = usePost(id)
-
-  const router = useRouter()
-
-  const deletePost = (id: number) => {
-    if (!confirm('정말 삭제하시겠습니까?')) return
-
-    client
-      .DELETE('/api/v1/posts/{id}', {
-        params: {
-          path: {
-            id,
-          },
-        },
-      })
-      .then((res) => {
-        if (res.error) {
-          alert(res.error.msg)
-          return
-        }
-        alert(res.data.msg)
-        router.replace('/posts')
-      })
-  }
+  const { post, deletePost } = usePost(id)
 
   const deletePostComment = (id: number, commentId: number) => {
     if (!confirm('정말 삭제하시겠습니까?')) return
@@ -136,22 +112,19 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
     <>
       <h1>게시글 상세페이지</h1>
       <>
-        <div>게시글 번호: {post.post?.id}</div>
-        <div>게시글 제목: {post.post?.title}</div>
-        <div>게시글 내용: {post.post?.content}</div>
+        <div>게시글 번호: {post.id}</div>
+        <div>게시글 제목: {post.title}</div>
+        <div>게시글 내용: {post.content}</div>
       </>
 
       <div className="flex gap-2">
         <button
-          onClick={() => deletePost(post.post?.id!)}
+          onClick={() => deletePost(post.id!)}
           className="p-2 rounded border"
         >
           삭제
         </button>
-        <Link
-          className="p-2 rounded border"
-          href={`/posts/${post.post?.id}/edit`}
-        >
+        <Link className="p-2 rounded border" href={`/posts/${post.id}/edit`}>
           수정
         </Link>
       </div>
