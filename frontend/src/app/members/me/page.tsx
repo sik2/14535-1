@@ -1,9 +1,10 @@
 'use client'
 
-import useAuth from '@/global/auth/hooks/useAuth'
+import { useAuthContext } from '@/global/auth/hooks/useAuth'
 
 export default function Page() {
-  const { isLogin, loginMember } = useAuth()
+  const { isLogin, loginMember } = useAuthContext()
+
   return (
     <>
       <h1>내 정보</h1>
