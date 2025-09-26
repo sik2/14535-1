@@ -26,6 +26,9 @@ export default function useAuth() {
         return
       }
 
+      // UI 로그아웃 처리
+      setLoginMember(null)
+
       router.replace('/posts')
     })
   }
