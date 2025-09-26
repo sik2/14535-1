@@ -1,6 +1,6 @@
 import { components } from '@/global/backend/apiV1/schema'
 import { client } from '@/global/backend/client'
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
@@ -43,3 +43,7 @@ export default function useAuth() {
     setLoginMember,
   } as const
 }
+
+export const AuthContext = createContext<ReturnType<typeof useAuth> | null>(
+  null,
+)

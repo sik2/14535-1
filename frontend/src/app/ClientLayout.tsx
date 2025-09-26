@@ -1,13 +1,8 @@
 'use client'
 
-import useAuth from '@/global/auth/hooks/useAuth'
-import { createContext } from 'react'
+import useAuth, { AuthContext } from '@/global/auth/hooks/useAuth'
 
 import Link from 'next/link'
-
-export const AuthContext = createContext<ReturnType<typeof useAuth> | null>(
-  null,
-)
 
 export default function ClientLayout({
   children,
