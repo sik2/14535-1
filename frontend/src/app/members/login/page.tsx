@@ -1,14 +1,13 @@
 'use client'
 
-import { AuthContext } from '@/global/auth/hooks/useAuth'
+import { useAuthContext } from '@/global/auth/hooks/useAuth'
 import { client } from '@/global/backend/client'
-import { use } from 'react'
 
 import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const router = useRouter()
-  const authState = use(AuthContext)
+  const authState = useAuthContext()
 
   const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
