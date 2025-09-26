@@ -1,14 +1,17 @@
 'use client'
 
-import { useAuthContext } from '@/global/auth/hooks/useAuth'
 import { use } from 'react'
 
 import usePost from '../../../../domain/post/hooks/usePost'
+import withLogin from '../../../../global/auth/hoc/withLogin'
 
-export default function Page({ params }: { params: Promise<{ id: number }> }) {
+export default withLogin(function Page({
+  params,
+}: {
+  params: Promise<{ id: number }>
+}) {
   const { id } = use(params)
   const { post, modifyPost } = usePost(id)
-  const { isLogin } = useAuthContext()
 
   const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -37,8 +40,6 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
 
   if (post === null) return <div>로딩중...</div>
 
-  if (!isLogin) return <>로그인 후 사용해주세요.</>
-
   return (
     <>
       <h1>{id}번 글 수정 페이지</h1>
@@ -64,4 +65,4 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
       </form>
     </>
   )
-}
+})
