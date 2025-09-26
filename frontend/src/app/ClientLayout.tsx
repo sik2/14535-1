@@ -1,6 +1,7 @@
 'use client'
 
-import useAuth, { AuthContext } from '@/global/auth/hooks/useAuth'
+import { AuthContext } from '@/global/auth/hooks/useAuth'
+import { use } from 'react'
 
 import Link from 'next/link'
 
@@ -9,9 +10,8 @@ export default function ClientLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const authState = useAuth()
-
-  const { loginMember, isLogin, logout } = authState
+  const authState = use(AuthContext)
+  const { isLogin, loginMember, logout } = authState ?? {}
 
   return (
     <AuthContext value={authState}>
@@ -35,7 +35,7 @@ export default function ClientLayout({
                 href="/members/me"
                 className="p-2 rounded hover:bg-gray-100"
               >
-                {loginMember.nickname}님의 정보
+                {loginMember?.nickname}님의 정보
               </Link>
             </>
           ) : (
