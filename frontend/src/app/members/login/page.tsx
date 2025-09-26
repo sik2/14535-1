@@ -1,11 +1,14 @@
 'use client'
 
+import { AuthContext } from '@/app/ClientLayout'
 import { client } from '@/global/backend/client'
+import { use } from 'react'
 
 import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const router = useRouter()
+  const authState = use(AuthContext)
 
   const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -41,6 +44,10 @@ export default function Page() {
       .then((res) => {
         if (res.error) {
           alert(res.error.msg)
+        }
+
+        if (res.data) {
+          authState?.setLoginMember(res.data.data.item)
         }
 
         alert(res.data && res.data.msg)

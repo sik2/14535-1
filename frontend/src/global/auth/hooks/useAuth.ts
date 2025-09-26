@@ -33,11 +33,13 @@ export default function useAuth() {
     })
   }
 
-  if (isLogin) return { isLogin: true, loginMember, logout } as const
+  if (isLogin)
+    return { isLogin: true, loginMember, logout, setLoginMember } as const
 
   return {
     isLogin: false,
     loginMember: null,
     logout,
+    setLoginMember,
   } as const
 }
