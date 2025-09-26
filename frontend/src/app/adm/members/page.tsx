@@ -1,5 +1,6 @@
 'use client'
 
+import { useAuthContext } from '@/global/auth/hooks/useAuth'
 import { components } from '@/global/backend/apiV1/schema'
 import { client } from '@/global/backend/client'
 import { useEffect, useState } from 'react'
@@ -11,11 +12,17 @@ type MemberWithUsernameDto = components['schemas']['MemberWithUsernameDto']
 export default function Page() {
   const [members, setMembers] = useState<MemberWithUsernameDto[] | null>(null)
 
+  const { isLogin, isAmdin } = useAuthContext()
+
   useEffect(() => {
     client
       .GET('/api/v1/adm/members')
       .then((res) => res.data && setMembers(res.data))
   }, [])
+
+  if (!isLogin) return <>로그인 후 사용해 주세요.</>
+
+  if (!isAmdin) return <>관리자 권한이 없습니다.</>
 
   if (members == null) return <div>로딩중...</div>
 
