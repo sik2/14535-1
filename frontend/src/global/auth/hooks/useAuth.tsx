@@ -55,3 +55,13 @@ export function useAuthContext() {
 
   return authState
 }
+
+export function AuthProvider({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  const authState = useAuth()
+
+  return <AuthContext value={authState}>{children}</AuthContext>
+}

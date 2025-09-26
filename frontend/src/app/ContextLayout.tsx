@@ -1,6 +1,6 @@
 'use client'
 
-import useAuth, { AuthContext } from '@/global/auth/hooks/useAuth'
+import { AuthProvider } from '@/global/auth/hooks/useAuth'
 
 import ClientLayout from './ClientLayout'
 
@@ -9,11 +9,9 @@ export default function ContextLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const authState = useAuth()
-
   return (
-    <AuthContext value={authState}>
+    <AuthProvider>
       <ClientLayout>{children}</ClientLayout>
-    </AuthContext>
+    </AuthProvider>
   )
 }
