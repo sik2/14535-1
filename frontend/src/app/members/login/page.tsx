@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const router = useRouter()
-  const authState = useAuthContext()
+  const { setLoginMember } = useAuthContext()
 
   const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -46,7 +46,7 @@ export default function Page() {
         }
 
         if (res.data) {
-          authState?.setLoginMember(res.data.data.item)
+          setLoginMember(res.data.data.item)
         }
 
         alert(res.data && res.data.msg)
