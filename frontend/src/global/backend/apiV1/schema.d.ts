@@ -266,6 +266,7 @@ export interface components {
             /** Format: date-time */
             modifyDate: string;
             nickname: string;
+            isAdmin: boolean;
         };
         RsDataMemberDto: {
             resultCode: string;
@@ -299,6 +300,7 @@ export interface components {
             modifyDate: string;
             nickname: string;
             username: string;
+            isAdmin: boolean;
         };
         PostDto: {
             /** Format: int64 */
