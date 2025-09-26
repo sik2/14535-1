@@ -1,11 +1,14 @@
 'use client'
 
+import { useAuthContext } from '@/global/auth/hooks/useAuth'
 import { client } from '@/global/backend/client'
 
 import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const router = useRouter()
+
+  const { isLogin } = useAuthContext()
 
   const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -46,6 +49,8 @@ export default function Page() {
         router.replace(`/posts/${res.data.data.id}`)
       })
   }
+
+  if (!isLogin) return <>로그인 후 사용해주세요.</>
 
   return (
     <>
