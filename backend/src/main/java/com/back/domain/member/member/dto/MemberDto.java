@@ -9,14 +9,16 @@ public record MemberDto(
     @NonNull long id,
     @NonNull LocalDateTime createDate,
     @NonNull LocalDateTime modifyDate,
-    @NonNull String nickname
+    @NonNull String nickname,
+    @NonNull boolean isAdmin
 ) {
     public MemberDto(Member member) {
         this(
                 member.getId(),
                 member.getCreateDate(),
                 member.getModifyDate(),
-                member.getNickname()
+                member.getNickname(),
+                member.isAdmin()
         );
     }
 }
