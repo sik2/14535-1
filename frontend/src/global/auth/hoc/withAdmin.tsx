@@ -6,8 +6,7 @@ export default function withAdmin<P extends object>(
   Component: React.ComponentType<P>,
 ) {
   return function WithAdminComponent(props: P) {
-    const { isLogin, isAmdin } = useAuthContext()
-    const isAdmin = isAmdin
+    const { isLogin, isAdmin } = useAuthContext()
 
     if (!isLogin) {
       return <div>로그인 후 이용해주세요.</div>

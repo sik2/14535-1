@@ -10,7 +10,7 @@ export default function useAuth() {
 
   const [loginMember, setLoginMember] = useState<MemberDto | null>(null)
   const isLogin = loginMember !== null
-  const isAmdin = isLogin && loginMember.isAdmin
+  const isAdmin = isLogin && loginMember.isAdmin
 
   useEffect(() => {
     client.GET('/api/v1/members/me').then((res) => {
@@ -40,7 +40,7 @@ export default function useAuth() {
       loginMember,
       logout,
       setLoginMember,
-      isAmdin,
+      isAdmin,
     } as const
 
   return {
@@ -48,7 +48,7 @@ export default function useAuth() {
     loginMember: null,
     logout,
     setLoginMember,
-    isAmdin,
+    isAdmin,
   } as const
 }
 
